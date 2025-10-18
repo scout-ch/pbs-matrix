@@ -1,0 +1,80 @@
+ingress:
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure # necessary, since we have multiple entrypoints
+    traefik.ingress.kubernetes.io/router.tls.certresolver: letsencrypt
+elementAdmin:
+  ingress:
+    host: admin.chat.scout.ch
+  nodeSelector:
+    kaas.infomaniak.cloud/instance-pool: pck-8kxhclv-pdp
+elementWeb:
+  ingress:
+    host: chat.scout.ch
+  nodeSelector:
+    kaas.infomaniak.cloud/instance-pool: pck-8kxhclv-pdp
+matrixAuthenticationService:
+  postgres:
+    host: postgres.tractor.scout.ch
+    port: 5432
+    user: pbs-matrix-authentication-service
+    password:
+      secret: pbs-matrix-authentication-service-postgres
+      secretKey: password
+    database: pbs-matrix-authentication-service
+    sslMode: prefer
+  ingress:
+    host: account.chat.scout.ch
+  additional:
+    secrets.yaml:
+      configSecret: pbs-matrix-authentication-service-upstream-oauth2
+      configSecretKey: upstream_oauth2
+    auth.yaml:
+      config: |
+        account:
+          password_registration_enabled: false
+          registration_token_required: true
+          password_registration_email_required: false
+          password_change_allowed: false
+          email_change_allowed: false
+          displayname_change_allowed: true
+          password_recovery_enabled: false
+        passwords:
+          enabled: false
+  nodeSelector:
+    kaas.infomaniak.cloud/instance-pool: pck-8kxhclv-pdp
+matrixRTC:
+  ingress:
+    host: mrtc.chat.scout.ch
+  nodeSelector:
+    kaas.infomaniak.cloud/instance-pool: pck-8kxhclv-pdp
+serverName: scout.ch
+synapse:
+  additional:
+    user-directory.yaml:
+      config: |
+        user_directory:
+          enabled: true
+          search_all_users: true
+          prefer_local_users: true
+  postgres:
+    host: postgres.tractor.scout.ch
+    port: 5432
+    user: pbs-matrix
+    password:
+      secret: pbs-matrix-postgres
+      secretKey: password
+    database: pbs-matrix
+    sslMode: prefer
+  ingress:
+    host: matrix.chat.scout.ch
+  nodeSelector:
+    kaas.infomaniak.cloud/instance-pool: pck-8kxhclv-pdp
+initSecrets:
+  nodeSelector:
+    kaas.infomaniak.cloud/instance-pool: pck-8kxhclv-pdp
+deploymentMarkers:
+  nodeSelector:
+    kaas.infomaniak.cloud/instance-pool: pck-8kxhclv-pdp
+haproxy:
+  nodeSelector:
+    kaas.infomaniak.cloud/instance-pool: pck-8kxhclv-pdp

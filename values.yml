@@ -47,6 +47,9 @@ matrixRTC:
     host: mrtc.chat.scout.ch
   nodeSelector:
     kaas.infomaniak.cloud/instance-pool: pck-8kxhclv-pdp
+  sfu:
+    nodeSelector:
+      kaas.infomaniak.cloud/instance-pool: pck-8kxhclv-pdp
 serverName: scout.ch
 synapse:
   additional:

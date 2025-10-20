@@ -81,3 +81,6 @@ deploymentMarkers:
 haproxy:
   nodeSelector:
     kaas.infomaniak.cloud/instance-pool: pck-8kxhclv-pdp
+wellKnownDelegation:
+  baseDomainRedirect:
+    url: https://pfadi.swiss

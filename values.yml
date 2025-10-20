@@ -31,13 +31,8 @@ matrixAuthenticationService:
     auth.yaml:
       config: |
         account:
-          password_registration_enabled: false
-          registration_token_required: true
-          password_registration_email_required: false
-          password_change_allowed: false
           email_change_allowed: false
           displayname_change_allowed: true
-          password_recovery_enabled: false
         passwords:
           enabled: false
   nodeSelector:

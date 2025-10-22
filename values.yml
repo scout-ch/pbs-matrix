@@ -4,12 +4,12 @@ ingress:
     traefik.ingress.kubernetes.io/router.tls.certresolver: letsencrypt
 elementAdmin:
   ingress:
-    host: admin.chat.scout.ch
+    host: admin.chat.tractor.scout.ch
   nodeSelector:
     kaas.infomaniak.cloud/instance-pool: pck-8kxhclv-pdp
 elementWeb:
   ingress:
-    host: chat.scout.ch
+    host: chat.tractor.scout.ch
   nodeSelector:
     kaas.infomaniak.cloud/instance-pool: pck-8kxhclv-pdp
 matrixAuthenticationService:
@@ -23,7 +23,7 @@ matrixAuthenticationService:
     database: pbs-matrix-authentication-service
     sslMode: prefer
   ingress:
-    host: account.chat.scout.ch
+    host: account.chat.tractor.scout.ch
   additional:
     secrets.yaml:
       configSecret: pbs-matrix-authentication-service-upstream-oauth2
@@ -39,13 +39,13 @@ matrixAuthenticationService:
     kaas.infomaniak.cloud/instance-pool: pck-8kxhclv-pdp
 matrixRTC:
   ingress:
-    host: mrtc.chat.scout.ch
+    host: mrtc.chat.tractor.scout.ch
   nodeSelector:
     kaas.infomaniak.cloud/instance-pool: pck-8kxhclv-pdp
   sfu:
     nodeSelector:
       kaas.infomaniak.cloud/instance-pool: pck-8kxhclv-pdp
-serverName: scout.ch
+serverName: chat.tractor.scout.ch
 synapse:
   additional:
     user-directory.yaml:
@@ -64,7 +64,7 @@ synapse:
     database: pbs-matrix
     sslMode: prefer
   ingress:
-    host: matrix.chat.scout.ch
+    host: matrix.chat.tractor.scout.ch
   nodeSelector:
     kaas.infomaniak.cloud/instance-pool: pck-8kxhclv-pdp
   media:
@@ -84,4 +84,4 @@ postgres:
   enabled: false
 wellKnownDelegation:
   baseDomainRedirect:
-    url: https://pfadi.swiss
+    enabled: false
